@@ -5,15 +5,21 @@ using UnityEngine;
 public class CameraMgr : MonoBehaviour
 {
     public static CameraMgr inst;
+    public List<GameObject> spawnPoints;
     private void Awake()
     {
         inst = this;
+        
     }
+
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
+
+    public GameObject origin; // Programmer defined point 
 
     public GameObject RTSCameraRig;
     public GameObject YawNode;   // Child of RTSCameraRig
@@ -66,6 +72,16 @@ public class CameraMgr : MonoBehaviour
                 YawNode.transform.localEulerAngles = Vector3.zero;
             }
             isRTSMode = !isRTSMode;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha0)) // Middle of the Malacca Strait
+        {
+            YawNode.transform.position = new Vector3(0, 300, 10000);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            YawNode.transform.position = spawnPoints[0].transform.position + new Vector3 (0, 300, 0);
+            YawNode.transform.LookAt(new Vector3(0, YawNode.transform.position.y, 0));
+            Debug.Log(YawNode.transform.localEulerAngles);
         }
 
 

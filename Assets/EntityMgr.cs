@@ -20,7 +20,7 @@ public class EntityMgr : MonoBehaviour
     public List<Entity381> entities;
 
     public static int entityId = 0;
-
+    
     public Entity381 CreateEntity(EntityType et, Vector3 position, Vector3 eulerAngles)
     {
         Entity381 entity = null;

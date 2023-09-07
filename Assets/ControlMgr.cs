@@ -10,10 +10,12 @@ public class ControlMgr : MonoBehaviour
         inst = this;
     }
 
+    public bool spedUp;
+    public int spedUpSpeed = 2;
     // Start is called before the first frame update
     void Start()
     {
-        
+        spedUp = false;
     }
 
     public float deltaSpeed = 1;
@@ -35,6 +37,20 @@ public class ControlMgr : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.RightArrow))
                 SelectionMgr.inst.selectedEntity.desiredHeading += deltaHeading;
             SelectionMgr.inst.selectedEntity.desiredHeading = Utils.Degrees360(SelectionMgr.inst.selectedEntity.desiredHeading);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (spedUp)
+            {
+                Time.timeScale = 1;
+                spedUp = false;
+            }
+            else
+            {
+                Time.timeScale = spedUpSpeed;
+                spedUp = true;
+            }
         }
     }
 

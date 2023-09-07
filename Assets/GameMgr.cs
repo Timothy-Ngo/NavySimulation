@@ -10,10 +10,12 @@ public class GameMgr : MonoBehaviour
         inst = this;
     }
 
+    public List<GameObject> spawnPoints;
+
     // Start is called before the first frame update
     void Start()
     {
-        Vector3 position = Vector3.zero;
+        Vector3 position = spawnPoints[0].transform.position;
         foreach(GameObject go in EntityMgr.inst.entityPrefabs) {
             Entity381 ent = EntityMgr.inst.CreateEntity(go.GetComponent<Entity381>().entityType, position, Vector3.zero);
             position.x += 200;
