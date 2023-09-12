@@ -47,20 +47,27 @@ public class UnitAI : MonoBehaviour
 
     public void AddCommand(Command c)
     {
-        //print("Adding command; " + c.ToString());
+        print("Adding command; " + c.ToString());
         c.Init();
         commands.Add(c);
         if (c is Intercept)
+        {
             intercepts.Add(c as Intercept);
+            Debug.Log("Added " + c.ToString() + " to intercept List");
+        }
         else if (c is Follow)
             ;
         else
+        {
             moves.Add(c as Move);
+            Debug.Log("Added "+ c.ToString() + " to Move List");
+        }
+        
     }
 
     public void SetCommand(Command c)
     {
-        //print("Setting command: " + c.ToString());
+        print("Setting command: " + c.ToString());
         StopAndRemoveAllCommands();
         commands.Clear();
         moves.Clear();

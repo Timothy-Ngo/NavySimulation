@@ -58,7 +58,7 @@ public class AIMgr : MonoBehaviour
         }
     }
 
-    void AddOrSet(Command c, UnitAI uai)
+    public void AddOrSet(Command c, UnitAI uai)
     {
         if (Input.GetKey(KeyCode.LeftShift))
             uai.AddCommand(c);

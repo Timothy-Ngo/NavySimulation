@@ -44,11 +44,15 @@ public class ControlMgr : MonoBehaviour
             if (spedUp)
             {
                 Time.timeScale = 1;
+                CameraMgr.inst.cameraMoveSpeed *= spedUpSpeed;
+                CameraMgr.inst.cameraTurnRate *= spedUpSpeed;
                 spedUp = false;
             }
             else
             {
                 Time.timeScale = spedUpSpeed;
+                CameraMgr.inst.cameraMoveSpeed /= spedUpSpeed;
+                CameraMgr.inst.cameraTurnRate /= spedUpSpeed;
                 spedUp = true;
             }
         }

@@ -11,18 +11,19 @@ public class NPVesselController : MonoBehaviour
     public Entity.EntityType entityType;
     public List<Transform> transforms;
     public Entity381 entity;
+    
     // Start is called before the first frame update
     void Start()
     {
-
-        entity = EntityMgr.inst.CreateEntity(entityType, transform.position, Vector3.zero);
+        
+        entity = SpawnNPVessel(transform.position, Vector3.zero);
         MoveToCheckpoint(transforms[0].position);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+    
     }
 
 
@@ -32,7 +33,11 @@ public class NPVesselController : MonoBehaviour
         Move m = new Move(entity, newPosition);
         UnitAI ai = entity.GetComponent<UnitAI>();
         ai.SetCommand(m);
+
     }
+
+    public GameObject NPVesselsRoot;
+
 
     public Entity381 SpawnNPVessel(Vector3 spawnPosition, Vector3 spawnEulerAngles)
     {
@@ -40,7 +45,12 @@ public class NPVesselController : MonoBehaviour
         GameObject entityPrefab = EntityMgr.inst.entityPrefabs.Find(x => (x.GetComponent<Entity381>().entityType == entityType));
         if (entityPrefab != null)
         {
-           // GameObject entityGO = Instantiate(entityPrefab, spawnPosition, Quaternion.Euler(spawnEulerAngles), entitiesRoot.transform);
+            GameObject entityGO = Instantiate(entityPrefab, spawnPosition, Quaternion.Euler(spawnEulerAngles), NPVesselsRoot.transform);
+            if (entityGO != null)
+            {
+                Debug.Log("entity created");
+                ent= entityGO.GetComponent<Entity381>();
+            }
         }
 
         return ent;

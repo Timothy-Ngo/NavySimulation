@@ -14,7 +14,7 @@ public class Move : Command
     public LineRenderer potentialLine;
     public override void Init()
     {
-        //Debug.Log("MoveInit:\tMoving to: " + movePosition);
+        Debug.Log("MoveInit:\tMoving to: " + movePosition);
         line = LineMgr.inst.CreateMoveLine(entity.position, movePosition);
         line.gameObject.SetActive(false);
         potentialLine = LineMgr.inst.CreatePotentialLine(entity.position);
@@ -23,6 +23,7 @@ public class Move : Command
 
     public override void Tick()
     {
+        Debug.Log("Tick executed on " + entity.gameObject.name);
         DHDS dhds;
         if (AIMgr.inst.isPotentialFieldsMovement)
             dhds = ComputePotentialDHDS();
@@ -48,8 +49,9 @@ public class Move : Command
 
     public DHDS ComputePotentialDHDS()
     {
+
         Potential p;
-        repulsivePotential = Vector3.one; repulsivePotential.y = 0;
+        repulsivePotential = Vector3.zero; repulsivePotential.y = 0;
         foreach (Entity381 ent in EntityMgr.inst.entities) {
             if (ent == entity) continue;
             p = DistanceMgr.inst.GetPotential(entity, ent);
